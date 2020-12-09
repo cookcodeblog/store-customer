@@ -1,6 +1,7 @@
 package com.exmaple.store.controller;
 
 
+import com.exmaple.store.feign.PreferenceFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,14 +24,18 @@ public class CustomerController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${preferences.api.url}")
-    private String remoteURL;
+//    @Value("${preferences.api.url}")
+//    private String remoteURL;
+
+    @Autowired
+    private PreferenceFeignClient preferenceFeignClient;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<String> getCustomer(@RequestHeader("User-Agent") String userAgent, @RequestHeader(value = "user-preference", required = false) String userPreference) {
         try {
-            ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
+            // ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
+            ResponseEntity<String> responseEntity = preferenceFeignClient.getPreferences();
             String response = responseEntity.getBody();
             return ResponseEntity.ok(String.format(RESPONSE_STRING_FORMAT, response.trim()));
         } catch (HttpStatusCodeException ex) {

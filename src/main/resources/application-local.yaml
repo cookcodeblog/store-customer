@@ -1,0 +1,25 @@
+#preferences:
+#  api:
+#    url: http://preference/ # Don't need hardcode hostname and port, e.g. http://localhost:8180
+
+# Use OpenFeign to lookup service name
+
+server:
+  port: 0 # ${random.int(5000,5100)} doesn't work in zuul ?
+
+eureka:         #tells about the Eureka server details and its refresh time
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+logging:
+  level:
+    com.example.store: DEBUG
