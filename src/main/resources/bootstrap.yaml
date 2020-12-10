@@ -4,9 +4,17 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+  jpa:
+    open-in-view: false
 
 management:
   endpoints:
     web:
       exposure:
         include: refresh # auto refresh doesn't work ?
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 6831

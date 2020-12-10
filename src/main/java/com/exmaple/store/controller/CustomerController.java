@@ -2,6 +2,7 @@ package com.exmaple.store.controller;
 
 
 import com.exmaple.store.feign.PreferenceFeignClient;
+import io.opentracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,9 @@ public class CustomerController {
 //    @Value("${preferences.api.url}")
 //    private String remoteURL;
 
+//    @Autowired
+//    private Tracer tracer;
+
     @Autowired
     private PreferenceFeignClient preferenceFeignClient;
 
@@ -34,6 +38,14 @@ public class CustomerController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<String> getCustomer(@RequestHeader("User-Agent") String userAgent, @RequestHeader(value = "user-preference", required = false) String userPreference) {
         try {
+            /**
+             * Set baggage
+             */
+//            tracer.activeSpan().setBaggageItem("user-agent", userAgent);
+//            if (userPreference != null && !userPreference.isEmpty()) {
+//                tracer.activeSpan().setBaggageItem("user-preference", userPreference);
+//            }
+
             // ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
             ResponseEntity<String> responseEntity = preferenceFeignClient.getPreferences();
             String response = responseEntity.getBody();
