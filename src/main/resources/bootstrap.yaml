@@ -1,9 +1,6 @@
 spring:
   application:
     name: customer
-  cloud:
-    config:
-      uri: http://localhost:8888
   jpa:
     open-in-view: false
 
@@ -13,8 +10,3 @@ management:
       exposure:
         include: "refresh,hystrix.stream" # auto refresh doesn't work ?
 
-opentracing:
-  jaeger:
-    udp-sender:
-      host: localhost
-      port: 6831
