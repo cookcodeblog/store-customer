@@ -23,3 +23,14 @@ eureka:         #tells about the Eureka server details and its refresh time
 logging:
   level:
     com.example.store: DEBUG
+
+ribbon:
+  ReadTimeout: 5000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

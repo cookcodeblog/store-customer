@@ -2,6 +2,8 @@ package com.exmaple.store.controller;
 
 
 import com.exmaple.store.feign.PreferenceFeignClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.opentracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,8 @@ public class CustomerController {
 
     private static final String RESPONSE_STRING_FORMAT = "customer => %s\n";
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
 //    @Value("${preferences.api.url}")
 //    private String remoteURL;
@@ -35,6 +37,8 @@ public class CustomerController {
     private PreferenceFeignClient preferenceFeignClient;
 
 
+    @HystrixCommand(fallbackMethod = "defaultGetCustomer",
+            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000")})
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<String> getCustomer(@RequestHeader("User-Agent") String userAgent, @RequestHeader(value = "user-preference", required = false) String userPreference) {
         try {
@@ -68,6 +72,10 @@ public class CustomerController {
             return ex.getStatusCode().getReasonPhrase();
         }
         return responseBody;
+    }
+
+    private ResponseEntity<String> defaultGetCustomer(String userAgent, String userPreference) {
+        return ResponseEntity.ok("Fallback: Invoke default getCustomer()...");
     }
 
 }

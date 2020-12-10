@@ -11,7 +11,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh # auto refresh doesn't work ?
+        include: "refresh,hystrix.stream" # auto refresh doesn't work ?
 
 opentracing:
   jaeger:
