@@ -4,7 +4,7 @@ spring:
       uri: http://config-server/
 
 server:
-  port: 0 # ${random.int(5000,5100)} doesn't work in zuul ?
+  port: 8080
 
 eureka:         #tells about the Eureka server details and its refresh time
   instance:
@@ -37,5 +37,5 @@ hystrix:
 opentracing:
   jaeger:
     udp-sender:
-      host: ${JAEGER_HOST:localhost}
-      port: ${JAEGER_PORT:6831}
+      host: jaeger-agent
+      port: 6831
