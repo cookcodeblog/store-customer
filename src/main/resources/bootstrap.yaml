@@ -3,7 +3,7 @@ spring:
     name: customer
   cloud:
     config:
-      uri: ${CONFIG_SERVER_URL:http://config-server:8080/}
+      uri: http://config-server:8080/
   jpa:
     open-in-view: false
 
