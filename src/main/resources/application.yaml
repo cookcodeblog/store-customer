@@ -1,7 +1,4 @@
-spring:
-  cloud:
-    config:
-      uri: http://config-server:8080/
+
 
 server:
   port: 8080
@@ -36,5 +33,5 @@ hystrix:
 #opentracing:
 #  jaeger:
 #    udp-sender:
-#      host: jaeger-agent
-#      port: 6831
+#      host: ${JAEGER_HOST:localhost}
+#      port: ${JAEGER_PORT:6831}
