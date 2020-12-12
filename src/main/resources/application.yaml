@@ -13,7 +13,7 @@ eureka:         #tells about the Eureka server details and its refresh time
     instance-id: ${spring.application.name}:${random.int}
   client:
     serviceUrl:
-      defaultZone: http://service-registry/eureka/
+      defaultZone: http://service-registry:8080/eureka/
     healthcheck:
       enabled: true
     lease:
