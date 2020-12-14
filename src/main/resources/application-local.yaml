@@ -19,17 +19,17 @@ preferences:
 #    lease:
 #      duration: 5
 
-logging:
-  level:
-    com.example.store: DEBUG
-
-ribbon:
-  ReadTimeout: 5000
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
+#logging:
+#  level:
+#    com.example.store: DEBUG
+#
+#ribbon:
+#  ReadTimeout: 5000
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 5000
