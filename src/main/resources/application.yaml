@@ -40,3 +40,8 @@ logging:
 #    udp-sender:
 #      host: ${JAEGER_HOST:localhost}
 #      port: ${JAEGER_PORT:6831}
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+    http-sender:
+      url: ${JAEGER_COLLECTOR_ENDPOINT:http://jaeger-collector.istio-system.svc:14268/api/traces}
