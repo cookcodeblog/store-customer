@@ -1,7 +1,6 @@
 package com.exmaple.store.controller;
 
 
-import io.opentracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +26,8 @@ public class CustomerController {
     @Value("${preferences.api.url}")
     private String remoteURL;
 
-    @Autowired
-    private Tracer tracer;
+//    @Autowired
+//    private Tracer tracer;
 
 //    @HystrixCommand(fallbackMethod = "defaultGetCustomer",
 //            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000")})
