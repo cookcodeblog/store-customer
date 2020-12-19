@@ -22,7 +22,7 @@ public class CustomizedTracingFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         // Set baggage
-        Optional.ofNullable(request.getHeader(TRACING_HEADER_IS_PREVIEW_TEST)).ifPresent(x -> tracer.activeSpan().setBaggageItem(TRACING_HEADER_IS_PREVIEW_TEST, x));
+//        Optional.ofNullable(request.getHeader(TRACING_HEADER_IS_PREVIEW_TEST)).ifPresent(x -> tracer.activeSpan().setBaggageItem(TRACING_HEADER_IS_PREVIEW_TEST, x));
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

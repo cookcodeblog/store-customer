@@ -38,10 +38,10 @@ public class CustomerController {
             /**
              * Set baggage
              */
-            tracer.activeSpan().setBaggageItem("user-agent", userAgent);
-            if (userPreference != null && !userPreference.isEmpty()) {
-                tracer.activeSpan().setBaggageItem("user-preference", userPreference);
-            }
+//            tracer.activeSpan().setBaggageItem("user-agent", userAgent);
+//            if (userPreference != null && !userPreference.isEmpty()) {
+//                tracer.activeSpan().setBaggageItem("user-preference", userPreference);
+//            }
 
 
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
