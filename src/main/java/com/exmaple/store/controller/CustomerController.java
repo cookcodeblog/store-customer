@@ -1,6 +1,7 @@
 package com.exmaple.store.controller;
 
 
+import io.opentracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,11 +27,23 @@ public class CustomerController {
     @Value("${preferences.api.url}")
     private String remoteURL;
 
+    @Autowired
+    private Tracer tracer;
+
 //    @HystrixCommand(fallbackMethod = "defaultGetCustomer",
 //            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000")})
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<String> getCustomer(@RequestHeader("User-Agent") String userAgent, @RequestHeader(value = "user-preference", required = false) String userPreference) {
         try {
+            /**
+             * Set baggage
+             */
+            tracer.activeSpan().setBaggageItem("user-agent", userAgent);
+            if (userPreference != null && !userPreference.isEmpty()) {
+                tracer.activeSpan().setBaggageItem("user-preference", userPreference);
+            }
+
+
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
             String response = responseEntity.getBody();
             return ResponseEntity.ok(String.format(RESPONSE_STRING_FORMAT, response.trim()));
@@ -56,6 +69,10 @@ public class CustomerController {
 
     private ResponseEntity<String> defaultGetCustomer(String userAgent, String userPreference) {
         return ResponseEntity.ok("Fallback: Invoke default getCustomer()...");
+    }
+
+    private void setBagge() {
+
     }
 
 }
