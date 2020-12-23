@@ -37,5 +37,9 @@ preferences:
 #opentracing:
 #  jaeger:
 #    udp-sender:
-#      host: ${JAEGER_HOST:localhost}
-#      port: ${JAEGER_PORT:6831}
+#      host: localhost
+#      port: 6831
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411

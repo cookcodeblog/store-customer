@@ -51,11 +51,19 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 <!--        O.x.y is used for SpringBoot 1.5-->
+<!--        <dependency>-->
+<!--            <groupId>io.opentracing.contrib</groupId>-->
+<!--            <artifactId>opentracing-spring-jaeger-web-starter</artifactId>-->
+<!--            <version>0.2.2</version>-->
+<!--        </dependency>-->
+
+<!--        Test Zipkin-->
         <dependency>
-            <groupId>io.opentracing.contrib</groupId>
-            <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
-            <version>0.2.2</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+
+
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
